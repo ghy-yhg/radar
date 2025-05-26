@@ -1,0 +1,39 @@
+# 单模态示例
+model:
+  type: "fcn"  
+  params:
+    input_dim: 100  # 根据实际特征维度设置
+    hidden_dim: 128
+    num_classes: 5  # 根据实际类别数设置
+
+data:
+  modalities: ["polarization"]  # 只使用一个模态
+  paths:
+    polarization: "data/mock_polarization_features.npy"
+  labels: "data/mock_polarization_labels.npy"
+
+# # 多模态示例
+# model:
+#   type: "multi_modal"
+#   params:
+#     input_dims: [100,100,100,100]
+#     hidden_dim: 128
+#     num_classes: 5
+
+# data:
+#   paths:
+#     polarization: "data/mock_polarization_features.npy"
+#     rcs: "data/mock_rcs_features.npy"
+#     range_profile: "data/mock_range_profile_features.npy"
+#     micro_doppler: "data/mock_micro_doppler_features.npy"
+#   labels: "data/mock_polarization_labels.npy"
+#   modalities: ["polarization", "rcs", "range_profile", "micro_doppler"]
+
+training:
+  batch_size: 64
+  num_epochs: 150
+  optimizer: "Adam"
+  loss_function: "CrossEntropyLoss"
+  shuffle: true
+  validation_split: 0.2
+  learning_rate: 1e-3
